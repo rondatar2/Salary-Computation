@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 3</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+        body{
+            display: flex;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+        #container{
+            margin-top: 100px;
+            height: 400px;
+            width: 550px;
+            background-color: #f0f0ed;
+            box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-bottom: 40px;
+        }
+        .row{
+            height: 50px;
+            width: 450px;
+            display: flex;
+            align-items: baseline;
+        }
+        h1{
+            color: #457b9d;
+        }
+        .label{
+            width: 40%;
+        }
+        .input{
+            width: 60%;
+        }
+        select{
+            height: 30px;
+            width: 150px;
+        }
+        #row5{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+    </style>
+    <div id="container">
+        <h1>Salary Calculator</h1>
+        <div id="row1" class="row">
+            <div class="label">
+                <h3>Position: </h3>
+            </div>
+            <div class="input">
+                <select name="position" id="position">
+                    <option value="Employee">Employee</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Administrator">Administrator</option>
+                </select>
+            </div>
+        </div>
+        <div id="row2" class="row">
+            <div class="label">
+                <h3>Hours Worked: </h3>
+            </div>
+            <div class="input">
+                <input id="hours" type="text">
+            </div>
+        </div>
+        <div id="row3" class="row">
+            <div class="label">
+                <h3>Tax: </h3>
+            </div>
+            <div class="input">
+                <input type="radio" id="ten" name="tax" value="10%">
+                <label for="ten">10%</label>
+                <input type="radio" id="twenty" name="tax" value="20%">
+                <label for="twenty">20%</label>
+            </div>
+        </div>
+        <div id="row4" class="row">
+            <div class="label">
+                <h3>Deduction: </h3>
+            </div>
+            <div class="input">
+                <input type="checkbox" id="sss" value="SSS">
+                <label for="sss">SSS</label>
+                <input type="checkbox" id="pagibig" value="Pagibig">
+                <label for="pagibig">Pagibig</label>
+                <input type="checkbox" id="philhealth" value="Philhealth">
+                <label for="philhealth">Philhealth</label>
+            </div>
+        </div>
+        <div id="row5" class="row">
+            <button id="submit">CALCULATE</button>
+        </div>
+    </div>
+    <script>
+        const position = document.getElementById('position')
+        const hours = document.getElementById('hours')
+        const ten = document.getElementById('ten')
+        const twenty = document.getElementById('twenty')
+        const sss = document.getElementById('sss')
+        const pagibig = document.getElementById('pagibig')
+        const philhealth = document.getElementById('philhealth')
+        const submit = document.getElementById('submit')
+
+        let posValue = 0
+        let taxValue = 0
+        let deductionValue = 0
+        total = 0
+
+        submit.addEventListener('click', () => {
+            if(hours.value){
+                if(position.value == 'Employee'){
+                    posValue = 150
+                }
+                else if(position.value == 'Manager'){
+                    posValue = 250
+                }
+                else if(position.value == 'Administrator'){
+                    posValue = 400
+                }
+                else{
+                    posValue = 0
+                }
+                if(document.getElementById('ten').checked){
+                    taxValue = 0.9
+                }
+                else if(document.getElementById('twenty').checked){
+                    taxValue = 0.8
+                }
+                else{
+                    taxValue = 1
+                }
+                if(document.getElementById('sss').checked){
+                    deductionValue = -100
+                }
+                if(document.getElementById('pagibig').checked){
+                    deductionValue += -100
+                }
+                if(document.getElementById('philhealth').checked){
+                    deductionValue += -100
+                }
+                total = ( ( posValue * hours.value ) * taxValue ) + deductionValue
+                alert(`Your Salary is ${total}`)
+            }
+            else{
+                alert(`Enter your Hours Worked`)
+            }
+        })
+    </script>
+</body>
+</html>
